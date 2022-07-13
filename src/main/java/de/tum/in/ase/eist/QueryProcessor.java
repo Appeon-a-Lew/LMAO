@@ -2,6 +2,9 @@ package de.tum.in.ase.eist;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
 @Service
 public class QueryProcessor {
 
@@ -24,6 +27,20 @@ public class QueryProcessor {
                 }
             }
             return String.valueOf(summe);
+        }
+        else if (query.contains("largest")){
+            ArrayList<Integer> list = new ArrayList<>();
+
+            String[] array = query.split(",");
+            for (int i = 0; i < array.length; i++) {
+                if (array[i].matches(".*\\d.*")){
+                    list.add(Integer.parseInt(array[i]));
+                }
+            }
+            Optional<Integer> l = list.stream().max(Integer::compareTo);
+            if (l.isPresent()){
+                return String.valueOf(l.get());
+            }
         }
         return "";
     }

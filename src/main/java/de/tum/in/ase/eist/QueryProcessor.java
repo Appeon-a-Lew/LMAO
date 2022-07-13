@@ -30,8 +30,8 @@ public class QueryProcessor {
         }
         else if (query.contains("largest")){
             ArrayList<Integer> list = new ArrayList<>();
-
-            String[] array = query.split(",");
+            String s = query.substring(query.indexOf(":"));
+            String[] array = s.split(",");
             for (int i = 0; i < array.length; i++) {
                 if (array[i].matches(".*\\d.*")){
                     list.add(Integer.parseInt(array[i]));
